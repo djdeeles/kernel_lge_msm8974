@@ -87,3 +87,13 @@ GTAGS
 *~
 \#*#
 out
+<<<<<<< HEAD
+=======
+ozip/boot.img
+*.rej
+arch/arm/boot/
+scripts/
+usr/gen_init_cpio
+usr/initramfs_data.cpio
+arch/arm/kernel/vmlinux.lds
+>>>>>>> ea36709... Linux 3.4.92
