@@ -155,7 +155,7 @@ static struct dbs_tuners {
 	.optimal_freq = 960000,
 	.io_is_busy = 1,
 	.input_boost_freq = 1497600,
-	.boostpulse_duration = 900000,
+	.boostpulse_duration = 250000,
 };
 
 extern u64 last_input_time;
@@ -1329,4 +1329,3 @@ fs_initcall(cpufreq_gov_dbs_init);
 module_init(cpufreq_gov_dbs_init);
 #endif
 module_exit(cpufreq_gov_dbs_exit);
-
