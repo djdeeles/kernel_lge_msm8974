@@ -210,22 +210,6 @@ static unsigned int freq_to_above_hispeed_delay(unsigned int freq)
 	return ret;
 }
 
-static unsigned int freq_to_targetload(unsigned int freq)
-{
-	int i;
-	unsigned int ret;
-	unsigned long flags;
-
-	spin_lock_irqsave(&target_loads_lock, flags);
-
-	for (i = 0; i < ntarget_loads - 1 && freq >= target_loads[i+1]; i += 2)
-		;
-
-	ret = target_loads[i];
-	spin_unlock_irqrestore(&target_loads_lock, flags);
-	return ret;
-}
-
 static unsigned int calc_freq(struct cpufreq_interactive_cpuinfo *pcpu,
 	unsigned int load)
 {
