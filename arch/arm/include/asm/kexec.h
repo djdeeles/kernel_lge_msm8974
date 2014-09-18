@@ -19,6 +19,10 @@
 
 #ifndef __ASSEMBLY__
 
+#ifdef CONFIG_KEXEC_HARDBOOT
+#define KEXEC_HB_PAGE_MAGIC 0x4a5db007
+#endif
+
 /**
  * crash_setup_regs() - save registers for the panic kernel
  * @newregs: registers are saved here
@@ -52,6 +56,10 @@ static inline void crash_setup_regs(struct pt_regs *newregs,
 
 /* Function pointer to optional machine-specific reinitialization */
 extern void (*kexec_reinit)(void);
+
+#ifdef CONFIG_KEXEC_HARDBOOT
+extern void (*kexec_hardboot_hook)(void);
+#endif
 
 #endif /* __ASSEMBLY__ */
 
