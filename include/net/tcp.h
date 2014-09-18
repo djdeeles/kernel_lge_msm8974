@@ -55,9 +55,9 @@ extern void tcp_time_wait(struct sock *sk, int state, int timeo);
 #define MAX_TCP_HEADER	(128 + MAX_HEADER)
 #define MAX_TCP_OPTION_SPACE 40
 
-/* 
+/*
  * Never offer a window over 32767 without using window scaling. Some
- * poor stacks do signed 16bit maths! 
+ * poor stacks do signed 16bit maths!
  */
 #define MAX_TCP_WINDOW		32767U
 
@@ -97,7 +97,6 @@ extern void tcp_time_wait(struct sock *sk, int state, int timeo);
 				 * RFC1122 says that the limit is 100 sec.
 				 * 15 is ~13-30min depending on RTO.
 				 */
-
 /*                                                                            */
 #if defined(CONFIG_MACH_MSM8974_G2_LGU) || defined(CONFIG_MACH_MSM8974_VU3_LGU) || defined(CONFIG_MACH_MSM8974_Z_LGU) || defined(CONFIG_MACH_MSM8974_B1_LGU)
 #define TCP_SYN_RETRIES	 4
@@ -105,7 +104,6 @@ extern void tcp_time_wait(struct sock *sk, int state, int timeo);
 #define TCP_SYN_RETRIES	 5	/* number of times to retry active opening a
 				 * connection: ~180sec is RFC minimum	*/
 #endif
-
 /*                                                                          */
 
 #define TCP_SYNACK_RETRIES 5	/* number of times to retry passive opening a
@@ -167,7 +165,7 @@ extern void tcp_time_wait(struct sock *sk, int state, int timeo);
 /*
  *	TCP option
  */
- 
+
 #define TCPOPT_NOP		1	/* Padding */
 #define TCPOPT_EOL		0	/* End of options */
 #define TCPOPT_MSS		2	/* Segment size negotiating */
@@ -259,11 +257,8 @@ extern int sysctl_tcp_max_ssthresh;
 extern int sysctl_tcp_cookie_size;
 extern int sysctl_tcp_thin_linear_timeouts;
 extern int sysctl_tcp_thin_dupack;
-
-
-
 extern int sysctl_tcp_challenge_ack_limit;
-
+extern int sysctl_tcp_default_init_rwnd;
 
 extern atomic_long_t tcp_memory_allocated;
 extern struct percpu_counter tcp_sockets_allocated;
@@ -450,10 +445,10 @@ extern int tcp_disconnect(struct sock *sk, int flags);
 
 /* From syncookies.c */
 extern __u32 syncookie_secret[2][16-4+SHA_DIGEST_WORDS];
-extern struct sock *cookie_v4_check(struct sock *sk, struct sk_buff *skb, 
+extern struct sock *cookie_v4_check(struct sock *sk, struct sk_buff *skb,
 				    struct ip_options *opt);
 #ifdef CONFIG_SYN_COOKIES
-extern __u32 cookie_v4_init_sequence(struct sock *sk, struct sk_buff *skb, 
+extern __u32 cookie_v4_init_sequence(struct sock *sk, struct sk_buff *skb,
 				     __u16 *mss);
 #else
 static inline __u32 cookie_v4_init_sequence(struct sock *sk,
@@ -1018,16 +1013,16 @@ static inline int tcp_win_from_space(int space)
 		space - (space>>sysctl_tcp_adv_win_scale);
 }
 
-/* Note: caller must be prepared to deal with negative returns */ 
+/* Note: caller must be prepared to deal with negative returns */
 static inline int tcp_space(const struct sock *sk)
 {
 	return tcp_win_from_space(sk->sk_rcvbuf -
 				  atomic_read(&sk->sk_rmem_alloc));
-} 
+}
 
 static inline int tcp_full_space(const struct sock *sk)
 {
-	return tcp_win_from_space(sk->sk_rcvbuf); 
+	return tcp_win_from_space(sk->sk_rcvbuf);
 }
 
 static inline void tcp_openreq_init(struct request_sock *req,
